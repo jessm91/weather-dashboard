@@ -1,6 +1,7 @@
 h1 {
+    margin-top: -2rem;
     font-family: Arial;
-    font-size: 60px;
+    font-size: 4rem;
     font-weight: 600;
 }
 
@@ -16,6 +17,8 @@ h3, h4, h5 {
 .jumbotron {
     background-color: black;
     color: rgb(255, 255, 255);
+    height: 4rem;
+    margin-bottom: 0px;
 }
 
 .favorable {
@@ -42,7 +45,12 @@ h3, h4, h5 {
 .searchCol {
     height: 100vh;
     background-color: whitesmoke;
-    padding-top: 10px;
-    padding-right: 20px;
-    margin-right: 10px;
+    padding-top: 1rem;
+    padding-right: 2rem;
+    margin-right: -1rem;
+}
+
+.card.mb-3.mt-3 {
+    color: white;
+    background-color: blue;
 }
