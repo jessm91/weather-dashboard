@@ -139,5 +139,28 @@ async function displayFiveDayForecast() {
         var date = new Date ();
         var val = (date.getMonth() + 1) + "/" + (date.getDate() + i + 1) + "/" + date.getFullYear();
         var forecastDate = $("<h5 class='card-title'>").text(val);
+
+        cardBody.append(forecastDate);
+        var getCurrentWeatherIcon = response.list[i].weather[0].icon;
+        console.log(getCurrentWeatherIcon);
+        var displayWeatherIcon = $("<img src = http://openweathermap.org/img/wn/" + getCurrentWeatherIcon + ".png />");
+        cardBody.append(displayWeatherIcon);
+        var getTemp = response.list[i].main.temp;
+        var tempEl = $("<p class='card-text'>").text("Temp: "+getTemp+"° F");
+        cardBody.append(tempEl);
+        var getHumidity = response.list[i].main.humidity;
+        var humidityEl = $("<p class='card-text'>").text("Humidity: "+getHumidity+"%");
+        cardBody.append(humidityEl);
+        forecastCard.append(cardBody);
+        cardDeck.append(forecastCard);
     }
+    $("#forecastContainer").html(forecastDiv);
+};
+
+function historyDisplayWeather() {
+    cityName = $(this).attr("data-name");
+    displayWeather();
+    displayFiveDayForecast();
+    console.log(cityName);
 }
+$(document).on("click", ".city", historyDisplayWeather);
