@@ -102,4 +102,42 @@ async function displayWeather() {
         url: uvUrl,
         method: "GET"
     })
+
+    var getUvIndex = uvResponse.value;
+    var uvNumber = $("<span>");
+    if (getUvIndex > 0 && getUvIndex <= 5.99) {
+        uvNumber.addClass("favorable");
+    } else if (getUvIndex >= 5.99 && getUvIndex <= 10.99){
+        uvNumber.addClass("moderate");
+    } else {
+        uvNumber.addClass("severe");
+    }
+    uvNumber.text(getUvIndex);
+    var uvIndexEl = $("<p class='card-text'>").text("UV Index: ");
+    uvNumber.appendTo(uvIndexEl);
+    currentWeatherDiv.append(uvIndexEl);
+    $("#weatherContainer").html(currentWeatherDiv);
+};
+
+async function displayFiveDayForecast() {
+    var queryUrl = "https://api.openweathermap.org/data/2.5/forecast?q="+cityName+"&units=imperial&appid=d3b85d453bf90d469c82e650a0a3da26";
+    var response = await $.ajax({
+        url: queryUrl,
+        method: "GET"
+    })
+    var forecastDiv = $("<div id='fiveDayForecast'>");
+    var forecastHeader = $("<h5 class='card-header border-secondary'>").text("5 Day Forecast");
+    forecastDiv.append(forecastHeader);
+    var cardDeck = $("<div class='card-deck'>");
+    forecastDiv.append(cardDeck);
+
+    console.log(response);
+
+    for (i = 0; i < 5; i++) {
+        var forecastCard = $("<div class='card mb-3 mt-3'>");
+        var cardBody = $("<div class='card-body'>");
+        var date = new Date ();
+        var val = (date.getMonth() + 1) + "/" + (date.getDate() + i + 1) + "/" + date.getFullYear();
+        var forecastDate = $("<h5 class='card-title'>").text(val);
+    }
 }
