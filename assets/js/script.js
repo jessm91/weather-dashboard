@@ -45,7 +45,7 @@ function storeCurrentCity() {
     localStorage.setItem("currentCity", JSON.stringify(cityName));
 }
 
-$("#citySearchBtn").on("click", function(event) {
+$("#searchBtn").on("click", function(event) {
     event.preventDefault();
 
     cityName = $("#cityInput").val().trim();
@@ -66,7 +66,7 @@ $("#citySearchBtn").on("click", function(event) {
 
 $("#cityInput").keypress(function(e) {
     if(e.which === 13) {
-        $("#citySearchBtn").click();
+        $("#searchBtn").click();
     }
 })
 
@@ -107,9 +107,9 @@ async function displayWeather() {
 
     var getUvIndex = uvResponse.value;
     var uvNumber = $("<span>");
-    if (getUvIndex > 0 && getUvIndex <= 5.99) {
+    if (getUvIndex > 0 && getUvIndex <= 3.99) {
         uvNumber.addClass("favorable");
-    } else if (getUvIndex >= 5.99 && getUvIndex <= 10.99){
+    } else if (getUvIndex >= 3.99 && getUvIndex <= 8.99){
         uvNumber.addClass("moderate");
     } else {
         uvNumber.addClass("severe");
@@ -118,7 +118,7 @@ async function displayWeather() {
     var uvIndexEl = $("<p class='card-text'>").text("UV Index: ");
     uvNumber.appendTo(uvIndexEl);
     currentWeatherDiv.append(uvIndexEl);
-    $("#weatherContainer").html(currentWeatherDiv);
+    $("#weatherContainer").html(currentWeatherDiv).show();
 }
 
 async function displayFiveDayForecast() {
@@ -128,7 +128,7 @@ async function displayFiveDayForecast() {
         method: "GET"
     })
     var forecastDiv = $("<div id='fiveDayForecast'>");
-    var forecastHeader = $("<h5 class='card-header border-secondary'>").text("5 Day Forecast");
+    var forecastHeader = $("<h5 class='card-header'>").text("5-Day Forecast:");
     forecastDiv.append(forecastHeader);
     var cardDeck = $("<div class='card-deck'>");
     forecastDiv.append(cardDeck);
